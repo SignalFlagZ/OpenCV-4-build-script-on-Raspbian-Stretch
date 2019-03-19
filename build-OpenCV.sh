@@ -1,4 +1,4 @@
-#!/bin/bash -e -x
+#!/bin/bash
 # Mar. 19 2019
 # Signal Flag "Z"
 # https://signal-flag-z.blogspot.com/
