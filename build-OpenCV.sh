@@ -49,3 +49,57 @@ echo 'Make virtualenv.'
 source ~/.profile
 mkvirtualenv cv -p python3
 workon cv
+
+echo -e '\n----------'
+echo 'Install numpy.'
+pip install numpy
+
+echo -e '\n----------'
+echo 'Prepare to build OpenCV.'
+cd ~/Downloads/opencv
+mkdir build
+cd build
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D OPENCV_EXTRA_MODULES_PATH=~/Downloads/opencv_contrib/modules \
+-D ENABLE_NEON=ON \
+-D ENABLE_VFPV3=ON \
+-D BUILD_TESTS=OFF \
+-D OPENCV_ENABLE_NONFREE=ON \
+-D INSTALL_PYTHON_EXAMPLES=OFF \
+-D BUILD_EXAMPLES=OFF ..
+
+echo -e '\n----------'
+echo 'Change swap file size.'
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo sed -i.bak 's/^#\?\(CONF_SWAPSIZE=\).*/\12048/' /etc/dphys-swapfile
+sudo dphys-swapfile setup
+sudo dphys-swapfile swapon
+
+echo -e '\n----------'
+echo "Build OpenCV. It takes about 2 hours on RPi3B."
+make -j4
+
+echo -e '\n----------'
+echo 'Install OpenCV.'
+sudo make install
+sudo ldconfig
+
+echo -e '\n----------'
+echo 'Change swap file size.'
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo sed -i 's/^#\?\(CONF_SWAPSIZE=\).*/\1100/' /etc/dphys-swapfile
+sudo dphys-swapfile setup
+sudo dphys-swapfile swapon
+
+echo -e '\n----------'
+echo 'Make link.'
+cd ~/.virtualenvs/cv/lib/python3.5/site-packages/
+ln -s /usr/local/lib/python3.5/site-packages/cv2/python-3.5/cv2.cpython-35m-arm-linux-gnueabihf.so cv2.so
+cd ~
+
+echo -e '\n----------'
+echo 'Completed.'
