@@ -7,6 +7,8 @@
 user=`whoami`
 echo 'Your Name :' ${user}
 
+opencvbranch='4.0.1'
+
 echo -e '\n----------'
 echo 'Update repository'
 sudo apt update
@@ -25,8 +27,8 @@ sudo apt-get install -y libatlas-base-dev gfortran
 echo -e '\n----------'
 echo 'Get OpenCV from git.'
 cd ~/Downloads/
-git clone --depth 1 --branch 4.0.1 https://github.com/opencv/opencv.git
-git clone --depth 1 --branch 4.0.1 https://github.com/opencv/opencv_contrib.git
+git clone --depth 1 --branch ${opencvbranch} https://github.com/opencv/opencv.git
+git clone --depth 1 --branch ${opencvbranch} https://github.com/opencv/opencv_contrib.git
 
 echo -e '\n----------'
 echo 'Install virtualenv.'
