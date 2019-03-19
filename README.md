@@ -1,6 +1,6 @@
 # OpenCV-4-build-script-on-Raspbian-Stretch
 Simple script that builds OpenCV on Raspbian Stretch.
-OpenCV will be Installed for use python 3 in virtualenv cv.
+OpenCV will be Installed for use python 3 on virtualenv cv.
 
 ## Usage
 ### Build and install OpenCV
