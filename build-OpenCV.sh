@@ -7,6 +7,6 @@
 sudo apt update
 sudo apt -y upgrade
 
-user = `whoami`
+user=`whoami`
 echo ${user}
 
