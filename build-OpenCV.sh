@@ -1,5 +1,5 @@
-#!/bin/bash
-# Nov. 1 2016
+#!/bin/bash -e -x
+# Mar. 19 2019
 # Signal Flag "Z"
 # https://signal-flag-z.blogspot.com/
 # Copyright (c) 2019, Signal Flag "Z"  All rights reserved.
@@ -79,7 +79,7 @@ sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
 
 echo -e '\n----------'
-echo "Build OpenCV. It takes about 2 hours on RPi3B."
+echo "Build OpenCV. It takes about 3 hours on RPi3B."
 make -j4
 
 echo -e '\n----------'
